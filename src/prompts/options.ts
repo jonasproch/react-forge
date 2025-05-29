@@ -4,5 +4,6 @@ export enum Framework {
 }
 
 export type Questions = {
+    projectName: string
     framework: Framework
 }

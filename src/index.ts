@@ -1,5 +1,6 @@
 import promptUser from './prompts/promptUser.js'
 
-const { framework } = await promptUser()
+const { projectName, framework } = await promptUser()
 
+console.log(`Project name: ${projectName}`)
 console.log(`Chosen framework: ${framework}`)
