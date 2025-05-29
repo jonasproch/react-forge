@@ -14,6 +14,8 @@ export default async function promptUser(): Promise<Questions> {
             {
                 name: 'Vite',
                 value: Framework.Vite,
+                // Temporarily disabled until implementation is complete
+                disabled: true,
             },
         ],
     })
