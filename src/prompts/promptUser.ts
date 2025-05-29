@@ -2,7 +2,7 @@ import { select } from '@inquirer/prompts'
 import { Framework, Questions } from './options.js'
 
 export default async function promptUser(): Promise<Questions> {
-    const framework = await select({
+    const framework = await select<Framework>({
         message: 'Choose how you want to create your app',
         choices: [
             {
