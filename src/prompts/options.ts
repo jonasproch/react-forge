@@ -3,7 +3,12 @@ export enum Framework {
     Vite = 'vite',
 }
 
+export type Settings = {
+    typescript: boolean
+}
+
 export type Questions = {
     projectName: string
     framework: Framework
+    settings: Settings
 }

@@ -1,4 +1,4 @@
-import { select, input } from '@inquirer/prompts'
+import { select, input, confirm } from '@inquirer/prompts'
 import { Framework, Questions } from './options.js'
 
 export default async function promptUser(): Promise<Questions> {
@@ -14,14 +14,19 @@ export default async function promptUser(): Promise<Questions> {
             {
                 name: 'Vite',
                 value: Framework.Vite,
-                // Temporarily disabled until implementation is complete
-                disabled: true,
             },
         ],
+    })
+
+    const typescript = await confirm({
+        message: 'Do you wish to use Typescript?',
     })
 
     return {
         projectName,
         framework,
+        settings: {
+            typescript,
+        },
     }
 }
