@@ -7,8 +7,8 @@ const { projectName, framework, settings } = await promptUser()
 
 switch (framework) {
     case Framework.NextJS:
-        createNextApp(projectName, settings)
+        await createNextApp(projectName, settings)
         break
     case Framework.Vite:
-        createViteApp(projectName, settings)
+        await createViteApp(projectName, settings)
 }

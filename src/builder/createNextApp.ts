@@ -1,30 +1,40 @@
 import { spawn } from 'child_process'
 import ora from 'ora'
-import { Settings } from '../prompts/options.js'
+import { PackageManager, Settings } from '../prompts/options.js'
+import runStep from '../utils/runStep.js'
 
-export default function createNextApp(name: string, { typescript }: Settings) {
-    const spinner = ora('Creating Next.js project').start()
-
-    const flags = [
+export default async function createNextApp(
+    name: string,
+    {
+        typescript,
+        eslint,
+        packageManager,
+        appRouter,
+        srcDir,
+        turbopack,
+    }: Settings,
+) {
+    const createNextAppFlags = [
         '--no-tailwind',
-        '--no-eslint',
-        '--app',
-        '--src-dir',
-        '--turbopack',
+        eslint ? '--eslint' : '--no-eslint',
+        appRouter ? '--app' : '--no-app',
+        srcDir ? '--src-dir' : '--no-src-dir',
+        turbopack ? '--turbopack' : '--no-turbopack',
         '--import-alias',
         '@/*',
-        '--use-npm',
+        {
+            [PackageManager.NPM]: '--use-npm',
+            [PackageManager.YARN]: '--use-yarn',
+            [PackageManager.PNPM]: '--use-pnpm',
+            [PackageManager.BUN]: '--use-bun',
+        }[packageManager],
         typescript ? '--ts' : '--js',
     ]
 
-    const child = spawn('npx', ['create-next-app@latest', name, ...flags])
-
-    child.on('close', (code) => {
-        if (code !== 0) {
-            spinner.fail(`create-next-app exited with code ${code}`)
-            return
-        }
-
-        spinner.succeed('Next.js app created successfully!')
+    await runStep({
+        command: 'npx',
+        args: ['create-next-app@latest', name, ...createNextAppFlags],
+        spinnerMessage: 'Creating Next.js project',
+        successMessage: 'Next.js app created successfully!',
     })
 }
