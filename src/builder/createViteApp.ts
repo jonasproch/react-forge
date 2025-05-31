@@ -92,7 +92,7 @@ export default async function createViteApp(
             command: 'npx',
             args: ['eslint', name],
             spinnerMessage: 'Linting project',
-            successMessage: 'Lint rules applied'
+            successMessage: 'Lint rules applied',
         })
     }
 }
