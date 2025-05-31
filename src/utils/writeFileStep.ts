@@ -1,28 +1,22 @@
 import fs from 'fs'
+import ora from 'ora'
 
 type WriteFileStepProps = {
     file: string
+    content: string
+	spinnerMessage: string
+	successMessage: string
 }
 
-export default async function writeFileStep({ file }: WriteFileStepProps) {
-    const content = `
-        import { defineConfig } from "eslint/config";
-        import js from "@eslint/js";
-
-        export default defineConfig([
-	        {
-		        files: ["**/*.js"],
-		        plugins: {
-			        js,
-		        },
-		        extends: ["js/recommended"],
-		        rules: {
-			        "no-unused-vars": "warn",
-			        "no-undef": "warn",
-		        },
-	        },
-        ]);
-    `
+export default async function writeFileStep({
+    file,
+    content,
+	spinnerMessage,
+	successMessage,
+}: WriteFileStepProps) {
+    const spinner = ora(spinnerMessage).start()
 
     await fs.writeFileSync(file, content)
+
+	spinner.succeed(successMessage)
 }

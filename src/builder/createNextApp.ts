@@ -35,6 +35,6 @@ export default async function createNextApp(
         command: 'npx',
         args: ['create-next-app@latest', name, ...createNextAppFlags],
         spinnerMessage: 'Creating Next.js project',
-        successMessage: 'Next.js app created successfully!',
+        successMessage: 'Next.js app created',
     })
 }
