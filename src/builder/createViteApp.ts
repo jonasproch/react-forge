@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { PackageManager, Settings } from '../prompts/options.js'
+import { Settings } from '../prompts/options.js'
 import runStep from '../utils/runStep.js'
 import customStep from '../utils/customStep.js'
 import getUninstallKeyword from '../utils/packageManager/getUninstallKeyword.js'

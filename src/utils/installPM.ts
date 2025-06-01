@@ -1,6 +1,4 @@
-import { spawnSync } from 'child_process'
 import { PackageManager } from '../prompts/options.js'
-import ora from 'ora'
 import runStep from './runStep.js'
 
 export default async function installPM(pm: PackageManager) {
