@@ -3,6 +3,9 @@
     "version": "0.1.0",
     "main": "dist/index.js",
     "type": "module",
+    "bin": {
+        "react-forge-create": "dist/index.js"
+    },
     "scripts": {
         "start": "tsc && node dist/index.js",
         "build": "tsc --build"
