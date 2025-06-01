@@ -117,6 +117,7 @@ export default async function createViteApp(
         })
     }
 
+    // Install dependencies
     await runStep({
         command: packageManager,
         args: [
