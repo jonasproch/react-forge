@@ -69,6 +69,8 @@ export default async function createViteApp(
             command: packageManager,
             args: [
                 getInstallKeyword(packageManager),
+                getPrefixFlag(packageManager),
+                name,
                 'tailwindcss',
                 '@tailwindcss/vite',
             ],
@@ -117,7 +119,11 @@ export default async function createViteApp(
 
     await runStep({
         command: packageManager,
-        args: [getInstallKeyword(packageManager)],
+        args: [
+            getInstallKeyword(packageManager),
+            getPrefixFlag(packageManager),
+            name,
+        ],
         spinnerMessage: `Running ${packageManager} ${getInstallKeyword(
             packageManager,
         )}`,
