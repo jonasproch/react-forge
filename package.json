@@ -6,6 +6,9 @@
     "bin": {
         "react-forge-create": "./dist/index.js"
     },
+    "files": [
+        "dist"
+    ],
     "scripts": {
         "start": "tsc && node dist/index.js",
         "build": "tsc --build"
