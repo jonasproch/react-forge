@@ -1,5 +1,6 @@
 import { select, input, confirm } from '@inquirer/prompts'
 import { Framework, PackageManager, Questions } from './options.js'
+import checkPMInstallation from '../utils/checkPMInstallation.js'
 
 export default async function promptUser(): Promise<Questions> {
     const projectName = await input({ message: 'Enter name of your project' })
@@ -40,7 +41,7 @@ export default async function promptUser(): Promise<Questions> {
         })
     }
 
-    const packageManager = await select<PackageManager>({
+    let packageManager = await select<PackageManager>({
         message: 'Choose what package manager you want to use',
         choices: [
             {
@@ -62,6 +63,21 @@ export default async function promptUser(): Promise<Questions> {
         ],
     })
 
+    let installPM: boolean | null = null
+
+    if (!(await checkPMInstallation(packageManager))) {
+        installPM = await confirm({
+            message:
+                'Your selected package manager is not installed. Would you like to install it now?',
+        })
+
+        if (!installPM) {
+            console.log('Package manager has been switched to npm. If you wish to exit press Control + C.')
+
+            packageManager = PackageManager.NPM
+        }
+    }
+
     const eslint = await confirm({
         message: 'Would you like to use ESLint?',
     })
@@ -73,6 +89,7 @@ export default async function promptUser(): Promise<Questions> {
             typescript,
             eslint,
             packageManager,
+            installPM,
             appRouter,
             srcDir,
             turbopack,

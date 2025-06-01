@@ -14,6 +14,7 @@ export default async function createNextApp(
         turbopack,
     }: Settings,
 ) {
+    // Create Next App flags
     const createNextAppFlags = [
         '--no-tailwind',
         eslint ? '--eslint' : '--no-eslint',
@@ -31,6 +32,7 @@ export default async function createNextApp(
         typescript ? '--ts' : '--js',
     ]
 
+    // Create Next App
     await runStep({
         command: 'npx',
         args: ['create-next-app@latest', name, ...createNextAppFlags],
