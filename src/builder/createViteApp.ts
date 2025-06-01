@@ -22,7 +22,7 @@ export default async function createViteApp(
         command: packageManager,
         args: [
             'create',
-            `vite${packageManager === PackageManager.NPM && '@latest'}`,
+            `vite${packageManager === PackageManager.NPM ? '@latest' : ''}`,
             name,
             ...createViteAppFlags,
         ],
