@@ -12,21 +12,12 @@ export default async function createViteApp(
     { typescript, eslint, packageManager, tailwind }: Settings,
 ) {
     // Create Vite App flags
-    const createViteAppFlags = [
-        ...(packageManager === PackageManager.NPM ? ['--'] : []),
-        `--template`,
-        typescript ? 'react-ts' : 'react',
-    ]
+    const createViteAppFlags = [`--template`, typescript ? 'react-ts' : 'react']
 
     // Create Vite App
     await runStep({
-        command: packageManager,
-        args: [
-            'create',
-            `vite${packageManager === PackageManager.NPM ? '@latest' : ''}`,
-            name,
-            ...createViteAppFlags,
-        ],
+        command: 'npx',
+        args: ['create-vite@latest', name, ...createViteAppFlags],
         spinnerMessage: 'Creating Vite project',
         successMessage: 'Vite app created',
     })
