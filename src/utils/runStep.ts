@@ -16,10 +16,11 @@ export default async function runStep({
 }: RunStepProps) {
     const spinner = ora(spinnerMessage).start()
 
-    const { status } = await spawnSync(command, args)
+    const { status, stderr } = await spawnSync(command, args)
 
     if (status !== 0) {
         spinner.fail(`${command} exited with code ${status}`)
+        console.log(stderr)
         throw new Error(`${command} exited with code ${status}`)
     }
 
