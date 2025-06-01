@@ -108,7 +108,7 @@ export default async function createViteApp(
 
                 let indexCss = await fs.readFileSync(indexCssPath, 'utf-8')
 
-                indexCss = '@import "tailwindcss";\n' + indexCss
+                indexCss = '@import "tailwindcss";\n\n' + indexCss
 
                 await fs.writeFileSync(indexCssPath, indexCss)
             },
