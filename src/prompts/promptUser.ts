@@ -72,7 +72,9 @@ export default async function promptUser(): Promise<Questions> {
         })
 
         if (!installPM) {
-            console.log('Package manager has been switched to npm. If you wish to exit press Control + C.')
+            console.log(
+                'Package manager has been switched to npm. If you wish to exit press Control + C.',
+            )
 
             packageManager = PackageManager.NPM
         }
@@ -80,6 +82,10 @@ export default async function promptUser(): Promise<Questions> {
 
     const eslint = await confirm({
         message: 'Would you like to use ESLint?',
+    })
+
+    const tailwind = await confirm({
+        message: 'Would you like to use Tailwind?',
     })
 
     return {
@@ -93,6 +99,7 @@ export default async function promptUser(): Promise<Questions> {
             appRouter,
             srcDir,
             turbopack,
+            tailwind,
         },
     }
 }

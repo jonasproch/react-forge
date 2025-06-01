@@ -9,6 +9,7 @@ export default async function createNextApp(
         typescript,
         eslint,
         packageManager,
+        tailwind,
         appRouter,
         srcDir,
         turbopack,
@@ -16,7 +17,7 @@ export default async function createNextApp(
 ) {
     // Create Next App flags
     const createNextAppFlags = [
-        '--no-tailwind',
+        tailwind ? '--tailwind' : '--no-tailwind',
         eslint ? '--eslint' : '--no-eslint',
         appRouter ? '--app' : '--no-app',
         srcDir ? '--src-dir' : '--no-src-dir',

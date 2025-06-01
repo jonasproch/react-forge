@@ -14,6 +14,7 @@ export type Settings = {
     typescript: boolean
     eslint: boolean
     packageManager: PackageManager
+    tailwind: boolean
     installPM: boolean | null
     appRouter: boolean | null
     srcDir: boolean | null
