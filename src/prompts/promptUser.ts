@@ -3,7 +3,7 @@ import { Framework, PackageManager, Questions } from './options.js'
 import checkPMInstallation from '../utils/checkPMInstallation.js'
 
 export default async function promptUser(): Promise<Questions> {
-    const projectName = await input({ message: 'Enter name of your project' })
+    const projectName = await input({ message: 'Enter the name of your project' })
 
     const framework = await select<Framework>({
         message: 'Choose how you want to create your app',
