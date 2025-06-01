@@ -11,6 +11,6 @@ export default async function installDependencies(
         command: pm,
         args: ['install', getPrefixFlag(pm), projectName],
         spinnerMessage: `Running ${pm} ${getInstallKeyword(pm)}`,
-        successMessage: `${pm} ${getInstallKeyword(pm)} complete`,
+        successMessage: `${pm} install complete`,
     })
 }
