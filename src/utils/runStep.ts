@@ -20,7 +20,7 @@ export default async function runStep({
 
     if (status !== 0) {
         spinner.fail(`${command} exited with code ${status}`)
-        console.log(stderr)
+        console.log(stderr.toString())
         throw new Error(`${command} exited with code ${status}`)
     }
 
