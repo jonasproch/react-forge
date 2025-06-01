@@ -4,7 +4,7 @@
     "main": "dist/index.js",
     "type": "module",
     "bin": {
-        "react-forge-create": "dist/index.js"
+        "react-forge-create": "./dist/index.js"
     },
     "scripts": {
         "start": "tsc && node dist/index.js",
