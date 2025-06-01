@@ -9,7 +9,7 @@ export default async function installDependencies(
 ) {
     await runStep({
         command: pm,
-        args: ['install', getPrefixFlag(pm), projectName],
+        args: ['install', getPrefixFlag(pm), `${projectName}/`],
         spinnerMessage: `Running ${pm} ${getInstallKeyword(pm)}`,
         successMessage: `${pm} install complete`,
     })
