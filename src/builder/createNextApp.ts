@@ -1,5 +1,3 @@
-import { spawn } from 'child_process'
-import ora from 'ora'
 import { PackageManager, Settings } from '../prompts/options.js'
 import runStep from '../utils/runStep.js'
 

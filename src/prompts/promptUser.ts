@@ -9,12 +9,12 @@ export default async function promptUser(): Promise<Questions> {
         message: 'Choose how you want to create your app',
         choices: [
             {
-                name: 'Next.js',
-                value: Framework.NextJS,
-            },
-            {
                 name: 'Vite',
                 value: Framework.Vite,
+            },
+            {
+                name: 'Next.js',
+                value: Framework.NextJS,
             },
         ],
     })
@@ -72,7 +72,7 @@ export default async function promptUser(): Promise<Questions> {
     if (!(await checkPMInstallation(packageManager))) {
         installPM = await confirm({
             message:
-                'Your selected package manager is not installed. Would you like to install it now?',
+                'The selected package manager is not installed. Would you like to install it?',
         })
 
         if (!installPM) {
