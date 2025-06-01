@@ -53,12 +53,16 @@ export default async function promptUser(): Promise<Questions> {
                 value: PackageManager.YARN,
             },
             {
-                name: 'pnpm',
+                name: 'pnpm (Disabled until fully tested)',
                 value: PackageManager.PNPM,
+                // Disabled until properly tested
+                disabled: true,
             },
             {
-                name: 'bun',
+                name: 'bun (Disabled until fully tested)',
                 value: PackageManager.BUN,
+                // Disabled until properly tested
+                disabled: true,
             },
         ],
     })
