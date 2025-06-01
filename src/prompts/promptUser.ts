@@ -3,7 +3,12 @@ import { Framework, PackageManager, Questions } from './options.js'
 import checkPMInstallation from '../utils/checkPMInstallation.js'
 
 export default async function promptUser(): Promise<Questions> {
-    const projectName = await input({ message: 'Enter the name of your project' })
+    let projectName = await input({ message: 'Enter the name of your project (leave empty to use current folder)' })
+
+    // Set current folder to use as path to project
+    if (projectName.trim() === '') {
+        projectName = '.'
+    }
 
     const framework = await select<Framework>({
         message: 'Choose how you want to create your app',
@@ -27,6 +32,7 @@ export default async function promptUser(): Promise<Questions> {
     let srcDir: boolean | null = null
     let turbopack: boolean | null = null
 
+    // Next.js specific prompts
     if (framework === Framework.NextJS) {
         appRouter = await confirm({
             message: 'Would you like to use the Next.js App Router?',
@@ -69,6 +75,8 @@ export default async function promptUser(): Promise<Questions> {
 
     let installPM: boolean | null = null
 
+    // Check if chosen package manager is installed
+    // If not offer to install it
     if (!(await checkPMInstallation(packageManager))) {
         installPM = await confirm({
             message:

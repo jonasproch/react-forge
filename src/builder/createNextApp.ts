@@ -34,7 +34,7 @@ export default async function createNextApp(
     // Create Next App
     await runStep({
         command: 'npx',
-        args: ['create-next-app@latest', name, ...createNextAppFlags],
+        args: ['create-next-app@latest', `${name}/`, ...createNextAppFlags],
         spinnerMessage: 'Creating Next.js project',
         successMessage: 'Next.js app created',
     })

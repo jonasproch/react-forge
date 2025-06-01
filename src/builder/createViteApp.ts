@@ -17,7 +17,7 @@ export default async function createViteApp(
     // Create Vite App
     await runStep({
         command: 'npx',
-        args: ['create-vite@latest', name, ...createViteAppFlags],
+        args: ['create-vite@latest', `${name}/`, ...createViteAppFlags],
         spinnerMessage: 'Creating Vite project',
         successMessage: 'Vite app created',
     })
@@ -31,7 +31,7 @@ export default async function createViteApp(
             args: [
                 getUninstallKeyword(packageManager),
                 getPrefixFlag(packageManager),
-                name,
+                `${name}/`,
                 '@eslint/js',
                 'eslint',
                 'eslint-plugin-react-hooks',
@@ -62,7 +62,7 @@ export default async function createViteApp(
             args: [
                 getInstallKeyword(packageManager),
                 getPrefixFlag(packageManager),
-                name,
+                `${name}/`,
                 'tailwindcss',
                 '@tailwindcss/vite',
             ],
