@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import createNextApp from './builder/createNextApp.js'
 import createViteApp from './builder/createViteApp.js'
 import { Framework } from './prompts/options.js'
