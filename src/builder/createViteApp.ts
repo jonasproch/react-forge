@@ -4,10 +4,11 @@ import runStep from '../utils/runStep.js'
 import customStep from '../utils/customStep.js'
 import getUninstallKeyword from '../utils/packageManager/getUninstallKeyword.js'
 import getPrefixFlag from '../utils/packageManager/getPrefixFlag.js'
+import getInstallKeyword from '../utils/packageManager/getInstallKeyword.js'
 
 export default async function createViteApp(
     name: string,
-    { typescript, eslint, packageManager }: Settings,
+    { typescript, eslint, packageManager, tailwind }: Settings,
 ) {
     // Create Vite App flags
     const createViteAppFlags = [
@@ -52,12 +53,76 @@ export default async function createViteApp(
         // Remove ESLint config
         await customStep({
             process: async () => {
-                const configPath = `${name}/eslint.config.js`
+                const eslintConfigPath = `${name}/eslint.config.js`
 
-                await fs.unlinkSync(configPath)
+                await fs.unlinkSync(eslintConfigPath)
             },
             spinnerMessage: 'Removing ESLint config',
             successMessage: 'ESLint config removed',
         })
     }
+
+    // Setup Tailwind
+    if (tailwind) {
+        // Install Tailwind packages
+        await runStep({
+            command: packageManager,
+            args: [
+                getInstallKeyword(packageManager),
+                'tailwindcss',
+                '@tailwindcss/vite',
+            ],
+            spinnerMessage: 'Installing Tailwind',
+            successMessage: 'Tailwind installed',
+        })
+
+        // Add Tailwind plugin in Vite config
+        await customStep({
+            process: async () => {
+                const viteConfigPath = `${name}/vite.config.${
+                    typescript ? 'ts' : 'js'
+                }`
+
+                let viteConfig = await fs.readFileSync(viteConfigPath, 'utf8')
+
+                viteConfig =
+                    "import tailwindcss from '@tailwindcss/vite'\n" + viteConfig
+
+                viteConfig = viteConfig.replace(
+                    /plugins:\s*\[/,
+                    (match) => `${match}tailwindcss(), `,
+                )
+
+                await fs.writeFileSync(viteConfigPath, viteConfig)
+            },
+            spinnerMessage: 'Updating Vite config',
+            successMessage: 'Vite config updated',
+        })
+
+        // Add Tailwind import to index.css
+        await customStep({
+            process: async () => {
+                const indexCssPath = `${name}/src/index.css`
+
+                let indexCss = await fs.readFileSync(indexCssPath, 'utf-8')
+
+                indexCss = '@import "tailwindcss";\n' + indexCss
+
+                await fs.writeFileSync(indexCssPath, indexCss)
+            },
+            spinnerMessage: 'Adding Tailwind import into index css file',
+            successMessage: 'Tailwind import added',
+        })
+    }
+
+    await runStep({
+        command: packageManager,
+        args: [getInstallKeyword(packageManager)],
+        spinnerMessage: `Running ${packageManager} ${getInstallKeyword(
+            packageManager,
+        )}`,
+        successMessage: `${packageManager} ${getInstallKeyword(
+            packageManager,
+        )} complete`,
+    })
 }
