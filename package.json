@@ -1,7 +1,7 @@
 {
     "name": "react-forge-create",
     "version": "0.2.0",
-    "main": "dist/index.js",
+    "exports": "./dist/index.js",
     "type": "module",
     "bin": {
         "react-forge-create": "./dist/index.js"
