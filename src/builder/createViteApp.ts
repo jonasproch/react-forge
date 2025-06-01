@@ -5,6 +5,7 @@ import customStep from '../utils/customStep.js'
 import getUninstallKeyword from '../utils/packageManager/getUninstallKeyword.js'
 import getPrefixFlag from '../utils/packageManager/getPrefixFlag.js'
 import getInstallKeyword from '../utils/packageManager/getInstallKeyword.js'
+import installDependencies from '../utils/packageManager/installDependencies.js'
 
 export default async function createViteApp(
     name: string,
@@ -118,18 +119,5 @@ export default async function createViteApp(
     }
 
     // Install dependencies
-    await runStep({
-        command: packageManager,
-        args: [
-            getInstallKeyword(packageManager),
-            getPrefixFlag(packageManager),
-            name,
-        ],
-        spinnerMessage: `Running ${packageManager} ${getInstallKeyword(
-            packageManager,
-        )}`,
-        successMessage: `${packageManager} ${getInstallKeyword(
-            packageManager,
-        )} complete`,
-    })
+    await installDependencies(packageManager, name)
 }
