@@ -6,6 +6,7 @@ import getUninstallKeyword from '../utils/packageManager/getUninstallKeyword.js'
 import getPrefixFlag from '../utils/packageManager/getPrefixFlag.js'
 import getInstallKeyword from '../utils/packageManager/getInstallKeyword.js'
 import installDependencies from '../utils/packageManager/installDependencies.js'
+import getDevFlag from '../utils/packageManager/getDevFlag.js'
 
 export default async function createViteApp(
     name: string,
