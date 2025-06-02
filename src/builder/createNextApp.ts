@@ -1,4 +1,7 @@
 import { PackageManager, Settings } from '../prompts/options.js'
+import getDevFlag from '../utils/packageManager/getDevFlag.js'
+import getInstallKeyword from '../utils/packageManager/getInstallKeyword.js'
+import getPrefixFlag from '../utils/packageManager/getPrefixFlag.js'
 import runStep from '../utils/runStep.js'
 
 export default async function createNextApp(
@@ -11,6 +14,7 @@ export default async function createNextApp(
         appRouter,
         srcDir,
         turbopack,
+        prettier,
     }: Settings,
 ) {
     // Create Next App flags
@@ -38,4 +42,21 @@ export default async function createNextApp(
         spinnerMessage: 'Creating Next.js project',
         successMessage: 'Next.js app created',
     })
+
+    // Setup Prettier
+    if (prettier) {
+        // Install prettier
+        await runStep({
+            command: packageManager,
+            args: [
+                getInstallKeyword(packageManager),
+                getDevFlag(packageManager),
+                getPrefixFlag(packageManager),
+                `${name}/`,
+                'prettier',
+            ],
+            spinnerMessage: 'Installing Prettier',
+            successMessage: 'Prettier installed',
+        })
+    }
 }

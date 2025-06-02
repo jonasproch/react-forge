@@ -3,7 +3,10 @@ import { Framework, PackageManager, Questions } from './options.js'
 import checkPMInstallation from '../utils/checkPMInstallation.js'
 
 export default async function promptUser(): Promise<Questions> {
-    let projectName = await input({ message: 'Enter the name of your project (leave empty to use current folder)' })
+    let projectName = await input({
+        message:
+            'Enter the name of your project (leave empty to use current folder)',
+    })
 
     // Set current folder to use as path to project
     if (projectName.trim() === '') {
@@ -100,6 +103,10 @@ export default async function promptUser(): Promise<Questions> {
         message: 'Would you like to use Tailwind?',
     })
 
+    const prettier = await confirm({
+        message: 'Would you like to use Prettier?',
+    })
+
     return {
         projectName,
         framework,
@@ -112,6 +119,7 @@ export default async function promptUser(): Promise<Questions> {
             srcDir,
             turbopack,
             tailwind,
+            prettier,
         },
     }
 }

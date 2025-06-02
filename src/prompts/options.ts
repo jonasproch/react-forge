@@ -15,6 +15,7 @@ export type Settings = {
     eslint: boolean
     packageManager: PackageManager
     tailwind: boolean
+    prettier: boolean
     installPM: boolean | null
     appRouter: boolean | null
     srcDir: boolean | null

@@ -9,7 +9,7 @@ import installDependencies from '../utils/packageManager/installDependencies.js'
 
 export default async function createViteApp(
     name: string,
-    { typescript, eslint, packageManager, tailwind }: Settings,
+    { typescript, eslint, packageManager, tailwind, prettier }: Settings,
 ) {
     // Create Vite App flags
     const createViteAppFlags = [`--template`, typescript ? 'react-ts' : 'react']
@@ -106,6 +106,23 @@ export default async function createViteApp(
             },
             spinnerMessage: 'Adding Tailwind import into index css file',
             successMessage: 'Tailwind import added',
+        })
+    }
+
+    // Setup Prettier
+    if (prettier) {
+        // Install prettier
+        await runStep({
+            command: packageManager,
+            args: [
+                getInstallKeyword(packageManager),
+                getDevFlag(packageManager),
+                getPrefixFlag(packageManager),
+                `${name}/`,
+                'prettier',
+            ],
+            spinnerMessage: 'Installing Prettier',
+            successMessage: 'Prettier installed',
         })
     }
 
